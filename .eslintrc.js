@@ -28,6 +28,7 @@ module.exports = {
       }
     ],
     radix: 0,
+    'id-length': 0,
     'no-underscore-dangle': 0,
     'no-warning-comments': 0,
     'jsx-a11y/no-static-element-interactions': 0,

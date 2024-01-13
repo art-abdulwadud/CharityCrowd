@@ -3,7 +3,7 @@ module.exports = {
     title: 'CharityCrowd',
     description: 'A simple app for funding crucial projects',
     author: '@art-abdulwadud',
-    siteUrl: 'https://gatsbystarterdefaultsource.gatsbyjs.io/'
+    siteUrl: 'https://charitycrowd-ke.web.app'
   },
   plugins: [
     {
