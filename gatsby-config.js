@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+});
+
 module.exports = {
   siteMetadata: {
     title: 'CharityCrowd',
@@ -16,12 +20,6 @@ module.exports = {
         theme_color: '#e91e63',
         display: 'standalone',
         icon: 'src/images/favicon.png'
-      }
-    },
-    {
-      resolve: 'gatsby-plugin-env-variables',
-      options: {
-        allowList: ['GATSBY_apiKey', 'GATSBY_authDomain', 'GATSBY_projectId', 'GATSBY_storageBucket', 'GATSBY_messagingSenderId', 'GATSBY_appId', 'GATSBY_measurementId']
       }
     },
     {

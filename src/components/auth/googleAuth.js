@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import firebase from 'gatsby-plugin-firebase';
+import { useAtom } from 'jotai';
+import { toastAtom } from '../layout';
 
-const googleAuth = ({ authType }) => {
+const GoogleAuth = ({ authType }) => {
   const [loading, setLoading] = useState(false);
+  const [toast] = useAtom(toastAtom);
   const handleClick = async (e) => {
     try {
       e.preventDefault();
       setLoading(true);
       const provider = new firebase.auth.GoogleAuthProvider();
-      const result = await firebase.auth().signInWithPopup(provider);
+      await firebase.auth().signInWithPopup(provider);
       setLoading(false);
-      return { email: result.user.email, uid: result.user.uid };
+      return toast.current.show({ severity: 'success',
+        summary: 'Successfully logged in',
+        detail: 'Welcome back. Log in was successful',
+        life: 3000 });
     } catch (error) {
       setLoading(false);
-      console.log(error.message);
+      toast.current.show({ severity: 'error', summary: 'Error Signing in', detail: error.message, sticky: true });
       return error.message;
     }
   };
@@ -30,4 +36,4 @@ const googleAuth = ({ authType }) => {
   );
 };
 
-export default googleAuth;
+export default GoogleAuth;

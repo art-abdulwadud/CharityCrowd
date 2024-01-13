@@ -45,28 +45,25 @@ const Layout = ({ children }) => {
   const [, checkUser] = useAtom(userAtom);
   const [page] = useAtom(pageAtom);
   const [pageLoading, setPageLoading] = useAtom(pageLoadingAtom);
-  const [, setToast] = useAtom(toastAtom);
-  const [serverError, setServerError] = useAtom(serverErrorAtom);
+  const [toast, setToast] = useAtom(toastAtom);
   const toastRef = useRef();
   const getUserProfile = async (userId) => {
     // Fetch current user details and add them to the user atom
-    const myQuery = `
-      query GetUserProfile($userid: String!) {
-        getUserProfile(userid: $userid) {
-          name
-          email
-          admin
-        }
+    try {
+      const user = await firebase.firestore().collection('users').doc(userId).get();
+      if (user.exists) {
+        const { name, email, admin } = user.data();
+        checkUser({ id: userId, email: email, name: name, admin: admin });
+        return 'Success';
       }
-    `;
-    const results = await sendQuery(myQuery, { userid: userId });
-    if (results.errors && results.errors.length > 0) return checkUser({});
-    if (results.data && results.data.getUserProfile) {
-      setServerError(false);
-      const { name, email, admin } = results.data.getUserProfile;
-      return checkUser({ id: userId, email: email, name: name, admin: admin });
+      return toast.current.show({ severity: 'error',
+        summary: 'User not found',
+        detail: 'User account does not exists. Try Signing Up 😊',
+        sticky: true });
+    } catch (error) {
+      console.log(error.message);
+      return error.message;
     }
-    return setServerError(true);
   };
   useEffect(() => {
     setToast(toastRef);
@@ -103,19 +100,8 @@ const Layout = ({ children }) => {
         </div>
       ) : (
         <>
-          {serverError
-            ? (
-              <div className="w-100 h-100vh d-flex center column m-0">
-                <h1 className="text-pink-500">Server Error</h1>
-              </div>
-            )
-            : (
-              <>
-                { children }
-                <ScrollTop threshold={200} className="text-white bg-pink-500" />
-              </>
-            )}
-
+          { children }
+          <ScrollTop threshold={200} className="text-white bg-pink-500" />
         </>
       )}
     </main>
