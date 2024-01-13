@@ -1,0 +1,259 @@
+:root {
+    --red-bg: #ea2c58;
+    --white-bg: white;
+    --placeholder: rgba(0, 0, 0, .5);
+}
+
+html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font: 112.5%/1.45em georgia, serif, sans-serif;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    background-color: white !important;
+}
+
+body {
+    background-color: white !important;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: hsla(0, 0%, 0%, 0.8);
+    font-family: 'Spectral', serif;
+    font-weight: normal;
+    word-wrap: break-word;
+    font-kerning: normal;
+    -moz-font-feature-settings: "kern", "liga", "clig", "calt";
+    -ms-font-feature-settings: "kern", "liga", "clig", "calt";
+    -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
+    font-feature-settings: "kern", "liga", "clig", "calt";
+}
+
+* {
+    text-decoration: none !important;
+}
+
+button, a, input, textarea {
+    box-shadow: none !important;
+}
+
+input:active,
+input:focus,
+input:hover {
+    border-color: #e91e63 !important;
+}
+
+textarea:active,
+textarea:focus,
+textarea:hover {
+    border-color: #e91e63 !important;
+}
+
+::placeholder {
+    color: var(--placeholder) !important;
+}
+
+/* Background, font and placeholder Colors */
+.red-bg {
+    background-color: var(--red-bg) !important;
+}
+
+.red-bg-h {
+    background-color: var(--red-bg) !important;
+    color: white !important;
+}
+
+.red-bg-h:hover {
+    background-color: var(--white-bg) !important;
+    color: var(--red-bg);
+}
+
+.white-ph {
+    --placeholder: rgba(255, 255, 255, .7);
+}
+
+/* Heights and Widths */
+.h-100vh {
+    min-height: 100vh;
+}
+
+/* Flexbox */
+.center {
+    align-items: center;
+    justify-content: center;
+}
+
+.left {
+    align-items: flex-start;
+    justify-content: left;
+}
+
+.right {
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.center-space-around {
+    align-items: center;
+    justify-content: space-around;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.inherit-flex {
+    align-items: inherit;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.zero-flex {
+    flex: 1 1 0;
+}
+
+.half-flex {
+    flex: 1 1 40%;
+}
+
+.half-flex-on-large-screen {
+    flex: 1 1 40%;
+}
+
+.full-flex {
+    flex: 1 1 100%;
+}
+
+.gap-1 {
+    gap: 5px;
+}
+
+.gap-2 {
+    gap: 8px;
+}
+
+.cursor {
+    cursor: pointer !important;
+}
+
+/* custom bootstrap styles */
+button.btn-close {
+    color: white !important;
+}
+
+/* Custom Primereact styles */
+.p-steps-item.p-steps-current .p-menuitem-link {
+    box-shadow: none !important;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    border-color: #ea2c58 !important;
+    color: #e91e63 !important;
+}
+
+.p-datatable .p-sortable-column:focus {
+    box-shadow: none !important;
+}
+
+.p-datatable .p-sortable-column.p-highlight {
+    color: #e91e63 !important;
+}
+
+.pi-sort-amount-up-alt:before, .pi-sort-amount-down:before {
+    color: #e91e63 !important;
+}
+
+/* Common Classes */
+.bx-none {
+    box-shadow: none !important;
+}
+
+.short-des {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: auto;
+}
+
+.text-underlined {
+    text-decoration: underline !important;
+}
+
+/* Animation classes */
+.hide-section {
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+.add-margin-left {
+    margin-left: -1000px;
+    opacity: 0;
+}
+
+.add-left {
+    left: -1000px !important;
+    opacity: 0;
+}
+
+.enlarge {
+    transition: all 0.4s;
+}
+
+.enlarge:hover {
+    transform: scale(1.05);
+}
+
+/* Dismiss last pass extension */
+div[data-lastpass-root] {
+    z-index: -1;
+}
+
+@media only screen and (min-width: 991px) {}
+
+@media only screen and (max-width: 991px) {
+    .c-navlist {
+        background-color: white !important;
+    }
+
+    .flex-column-sm {
+        flex-direction: column;
+    }
+
+    .hide-on-small-screen {
+        display: none;
+    }
+
+    .single-project {
+        max-width: 450px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    html {
+        font-size: 100%;
+    }
+
+    .c-navlist {
+        background-color: white !important;
+    }
+
+    .flex-column-sm {
+        flex-direction: column;
+    }
+
+    .hide-on-small-screen {
+        display: none;
+    }
+
+    .single-project {
+        max-width: 300px;
+    }
+}

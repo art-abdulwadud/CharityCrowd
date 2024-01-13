@@ -1,14 +1,15 @@
 import React from 'react';
 import Layout from '../components/layout';
+import PageNotFound from '../components/pageNotFound/PageNotFound';
 import Seo from '../components/seo';
 
-const PageNotFound = () => {
+const PageNotFoundPage = () => {
   return (
     <Layout>
       <Seo title="404" />
-      <div>PageNotFound</div>
+      <PageNotFound />
     </Layout>
   );
 };
 
-export default PageNotFound;
+export default PageNotFoundPage;

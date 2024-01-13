@@ -14,11 +14,14 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.10.3",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.2.1",
     "firebase": "8.3.3",
     "gatsby": "^4.23.0",
+    "gatsby-plugin-env-variables": "^2.3.0",
     "gatsby-plugin-firebase": "^0.2.0-beta.4",
+    "gatsby-plugin-manifest": "^4.24.0",
     "gatsby-plugin-prettier-eslint": "^1.0.6",
     "jotai": "^1.8.4",
     "primeflex": "^3.2.1",
@@ -26,7 +29,10 @@
     "primereact": "^8.5.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.4.0",
+    "react-spinners": "^0.13.5",
+    "reactstrap": "^9.1.4"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
