@@ -14,6 +14,7 @@ export const sendQuery = async (query, variables = null) => {
     body: JSON.stringify({ query, variables: { ...variables } })
   });
   const response = await request.json();
+  console.log(response.errors);
   if (response.errors) throw response.errors;
   return response;
 };

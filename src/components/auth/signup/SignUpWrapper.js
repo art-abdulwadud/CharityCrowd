@@ -15,7 +15,7 @@ const SignUpWrapper = () => {
   const myQuery = `
     query SignUpUser($email: String!, $password: String!) {
       signUpUser(email: $email, password: $password) {
-        id
+        _id
       }
     }
   `;
@@ -38,6 +38,7 @@ const SignUpWrapper = () => {
       return toast.current.show({ severity: 'success', summary: 'Successfully Registered', detail: 'Just a sec, setting up your profile', life: 3000 });
     } catch (error) {
       setLoading(false);
+      console.log(error.message);
       return toast.current.show({ severity: 'error', summary: 'Error Signing up', detail: error.message, sticky: true });
     }
   };
