@@ -16,7 +16,7 @@ const StageTwoPayment = ({ inputs, setInputs }) => {
       </div>
       <div className="alert alert-warning text-xs" role="alert">
         <i className="pi pi-exclamation-triangle mr-2" />
-        Note that no deductions will be made to your credit/debit card until the app goes LIVE!
+        Note: This App is only a Demo! Please do not use your real payment details! Just use fake details!
       </div>
       <div className="grid formgrid p-fluid">
         <div className="field mb-4 col-12">
