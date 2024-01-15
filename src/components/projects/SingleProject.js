@@ -29,7 +29,7 @@ const SingleProject = ({ project }) => {
               <span className="text-sm text-900">{numberWithCommas(requiredAmount)}</span>
             </div>
             <ProgressBar value={parseInt((currentAmount * 100) / requiredAmount)} showValue={false} style={{ height: '6px', minWidth: '295px' }} color="#e91e63" />
-            {lastDonation ? (
+            {lastDonation?.userId ? (
               <>
                 <h5 className="text-pink-600 text-base mt-3">Last Donation</h5>
                 <div className="flex flex-column sm:flex-row sm:justify-content-between sm:align-items-center">

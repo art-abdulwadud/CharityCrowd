@@ -33,12 +33,18 @@ export const numberWithCommas = (num) => {
 
 export const getUsername = async (userId) => {
   const myQuery = `
-    query Query($userid: ID!) {
-      getUsername(userid: $userid)
+    query GetUserProfile($userid: String!) {
+      getUserProfile(userid: $userid) {
+        name
+      }
     }
   `;
   const results = await sendQuery(myQuery, { userid: userId });
-  return await results.data?.getUsername ? results.data.getUsername : 'User not found';
+  if (results.data && results.data.getUserProfile) {
+    const { name } = results.data.getUserProfile;
+    return name;
+  }
+  return 'User not found';
 };
 
 const Layout = ({ children }) => {
