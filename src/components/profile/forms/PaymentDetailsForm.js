@@ -62,7 +62,7 @@ const PaymentDetailsForm = ({ data }) => {
       </div>
       <div className="field mb-4 col-12 md:col-6">
         <label htmlFor="expiry-date" className="font-medium text-900">Expiry date</label>
-        <Calendar id="expiry-date" value={inputs.payment?.expiryDate ? new Date(parseInt(inputs.payment?.expiryDate)) : ''} onChange={(ev) => updateInput('expiryDate', ev.target.value)} required />
+        <Calendar id="expiry-date" view="month" dateFormat="mm/yy" value={inputs.payment?.expiryDate ? new Date(parseInt(inputs.payment?.expiryDate)) : new Date()} onChange={(ev) => updateInput('expiryDate', ev.target.value)} required />
       </div>
       <div className="field mb-4 col-12 md:col-6">
         <label htmlFor="pin-number" className="font-medium text-900">CVV</label>
