@@ -102,7 +102,7 @@ const AddProject = ({ modal, toggle }) => {
             )}
             <Button
               loading={loading}
-              label={activeIndex === 3 ? 'Add Project' : 'Continue'}
+              label={activeIndex === 3 && editingProject ? 'Save Changes' : activeIndex === 3 && !editingProject ? 'Add Project' : 'Continue'}
               className="text-sm bg-pink-500 border-pink-500 mt-3"
               type="submit"
             />
