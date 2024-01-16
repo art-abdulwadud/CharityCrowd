@@ -28,11 +28,7 @@ const AddProject = ({ modal, toggle }) => {
             }
           }
           `;
-        const newInputs = inputs;
-        Object.entries(newInputs).forEach((key) => typeof key[1] === 'string' ? newInputs[key[0]] = key[1].toLowerCase() : null);
-        Object.entries(newInputs.organizer).forEach((key) => typeof key[1] === 'string' ? newInputs.organizer[key[0]] = key[1].toLowerCase() : null);
-        Object.entries(newInputs.beneficiary).forEach((key) => typeof key[1] === 'string' ? newInputs.beneficiary[key[0]] = key[1].toLowerCase() : null);
-        const results = await sendQuery(myQuery, { currentUser: user.email, project: inputs });
+        const results = await sendQuery(myQuery, { currentUser: user.email, project: { ...inputs, userId: user.id } });
         results.errors ? null : queryClient.invalidateQueries(['fetchProjects']);
       }
       activeIndex === 3 ? setActiveIndex(0) : setActiveIndex(activeIndex + 1);
