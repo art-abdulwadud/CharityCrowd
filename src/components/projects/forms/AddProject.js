@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Button } from 'primereact/button';
 import { Steps } from 'primereact/steps';
@@ -17,7 +17,7 @@ const AddProject = ({ modal, toggle }) => {
   const defaultInputs = { name: '', description: '', requiredAmount: 0, organizer: { name: '', location: '', email: '' }, beneficiary: { name: '', location: '', email: '' } };
   const [inputs, setInputs] = useState(defaultInputs);
   const [activeIndex, setActiveIndex] = useState(0);
-  const items = [{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }, { label: 'Step 4' }];
+  const items = [{ label: 'Step 1', command: () => setActiveIndex(0) }, { label: 'Step 2', command: () => setActiveIndex(1) }, { label: 'Step 3', command: () => setActiveIndex(2) }, { label: 'Step 4', command: () => setActiveIndex(3) }];
   const handleSubmit = async (ev) => {
     try {
       ev.preventDefault();
@@ -42,6 +42,10 @@ const AddProject = ({ modal, toggle }) => {
       console.log(error.message);
     }
   };
+  useEffect(() => {
+    editingProject ? setInputs(defaultInputs) : setInputs(defaultInputs);
+    setActiveIndex(0);
+  }, [modal]);
   if (loading) {
     return (
       <Modal isOpen={modal} toggle={toggle}>
@@ -58,7 +62,7 @@ const AddProject = ({ modal, toggle }) => {
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader toggle={toggle} className="bg-pink-500 text-white">{editingProject ? 'Edit' : 'Add'} Project</ModalHeader>
       <ModalBody>
-        <Steps model={items} activeIndex={activeIndex} className="mb-3" />
+        <Steps model={items} activeIndex={activeIndex} onSelect={(e) => editingProject ? setActiveIndex(e.index) : null} readOnly={!editingProject} className="mb-3" />
         <form className="pt-5 pb-3" onSubmit={handleSubmit}>
           <AddProjectForm inputs={inputs} setInputs={setInputs} activeIndex={activeIndex} />
           <div className="w-100 text-right">
