@@ -3,10 +3,11 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { useAtom } from 'jotai';
 import { userAtom } from '../layout';
-import { showAddProjectModalAtom } from './Projects';
+import { editingProjectAtom, showAddProjectModalAtom } from './Projects';
 
 const ProjectsIntro = () => {
   const [, setModal] = useAtom(showAddProjectModalAtom);
+  const [, setEditingProject] = useAtom(editingProjectAtom);
   const [user] = useAtom(userAtom);
   return (
     <>
@@ -20,7 +21,10 @@ const ProjectsIntro = () => {
                 label="Add new project"
                 icon="pi pi-plus"
                 className="text-sm bg-pink-500 border-pink-500 mt-3"
-                onClick={() => setModal(true)}
+                onClick={() => {
+                  setEditingProject(false);
+                  setModal(true);
+                }}
               />
             ) : null}
           </div>

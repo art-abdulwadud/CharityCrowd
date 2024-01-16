@@ -5,10 +5,11 @@ import { navigate } from 'gatsby';
 import { useAtom } from 'jotai';
 import { numberWithCommas, pageLoadingAtom, userAtom } from '../layout';
 import DonaterName from '../projectdetails/donations/DonaterName';
-import { showAddProjectModalAtom } from './Projects';
+import { editingProjectAtom, showAddProjectModalAtom } from './Projects';
 
 const SingleProject = ({ project }) => {
   const [, setModal] = useAtom(showAddProjectModalAtom);
+  const [, setEditingProject] = useAtom(editingProjectAtom);
   const [user] = useAtom(userAtom);
   const { id, name, description, requiredAmount, currentAmount, lastDonation, userId } = project;
   const [, setPageLoading] = useAtom(pageLoadingAtom);
@@ -67,7 +68,10 @@ const SingleProject = ({ project }) => {
               type="button"
               label="Edit"
               className="p-button-outlined bg-white border-pink-500 text-pink-500 w-100"
-              onClick={() => setModal(true)}
+              onClick={() => {
+                setEditingProject(true);
+                setModal(true);
+              }}
             />
           ) : null}
         </div>

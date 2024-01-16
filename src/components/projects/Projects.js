@@ -8,6 +8,7 @@ import ProjectsList from './ProjectsList';
 import AddProject from './forms/AddProject';
 
 export const showAddProjectModalAtom = atom(false);
+export const editingProjectAtom = atom(false);
 
 const Projects = () => {
   const [user] = useAtom(userAtom);

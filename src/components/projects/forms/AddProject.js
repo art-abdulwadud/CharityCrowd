@@ -8,9 +8,11 @@ import { useAtom } from 'jotai';
 import AddProjectForm from './AddProjectForm';
 import { queryClient, userAtom } from '../../layout';
 import { sendQuery } from '../../globalFuncs';
+import { editingProjectAtom } from '../Projects';
 
 const AddProject = ({ modal, toggle }) => {
   const [user] = useAtom(userAtom);
+  const [editingProject] = useAtom(editingProjectAtom);
   const [loading, setLoading] = useState(false);
   const defaultInputs = { name: '', description: '', requiredAmount: 0, organizer: { name: '', location: '', email: '' }, beneficiary: { name: '', location: '', email: '' } };
   const [inputs, setInputs] = useState(defaultInputs);
@@ -54,7 +56,7 @@ const AddProject = ({ modal, toggle }) => {
   }
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader toggle={toggle} className="bg-pink-500 text-white">Add Project</ModalHeader>
+      <ModalHeader toggle={toggle} className="bg-pink-500 text-white">{editingProject ? 'Edit' : 'Add'} Project</ModalHeader>
       <ModalBody>
         <Steps model={items} activeIndex={activeIndex} className="mb-3" />
         <form className="pt-5 pb-3" onSubmit={handleSubmit}>
