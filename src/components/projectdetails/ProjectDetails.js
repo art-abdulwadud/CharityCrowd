@@ -104,7 +104,7 @@ const ProjectDetails = ({ projectId, inputs, setInputs, currentProject }) => {
               Project was posted on {new Date(parseInt(data.createdAt)).toDateString()} {`${data.numberOfDonations > 0 ? `and has ${data.numberOfDonations} donations` : ''}`}
             </div>
             <div className={`flex justify-content-between pb-3 ${activeSlide > 1 ? 'hide-section' : 'animate__animated animate__fadeInDown'}`} ref={donateAndShareButtons}>
-              <Button label="Donate" icon="pi pi-shopping-cart" className="p-button-outlined bg-pink-500 border-pink-500 text-white w-6 mr-2" onClick={user ? requestLogin : switchSlide} type="button" />
+              <Button label="Donate" icon="pi pi-shopping-cart" className="p-button-outlined bg-pink-500 border-pink-500 text-white w-6 mr-2" onClick={user.id ? switchSlide : requestLogin} type="button" />
               <Button label="Share" icon="pi pi-share-alt" className="p-button-outlined p-button-secondary border-pink-500 w-6 ml-2" onClick={handleShare} type="button" />
             </div>
             <div className={`flex justify-content-between pb-3 ${activeSlide < 2 ? 'hide-section' : 'animate__animated animate__fadeInUp'}`} ref={backAndProceedButtons}>
