@@ -45,6 +45,7 @@ const AddProject = ({ modal, toggle }) => {
   };
   useEffect(() => {
     if (editingProject && selectedProject) {
+      setInputs({ ...selectedProject, ...defaultInputs.organizer, ...defaultInputs.beneficiary });
       const getProjectDetails = async () => {
         const myQuery = `
         query GetProjectById($projectid: ID!) {
