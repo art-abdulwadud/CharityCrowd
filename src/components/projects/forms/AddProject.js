@@ -8,11 +8,12 @@ import { useAtom } from 'jotai';
 import AddProjectForm from './AddProjectForm';
 import { queryClient, userAtom } from '../../layout';
 import { sendQuery } from '../../globalFuncs';
-import { editingProjectAtom } from '../Projects';
+import { editingProjectAtom, selectedProjectAtom } from '../Projects';
 
 const AddProject = ({ modal, toggle }) => {
   const [user] = useAtom(userAtom);
   const [editingProject] = useAtom(editingProjectAtom);
+  const [selectedProject] = useAtom(selectedProjectAtom);
   const [loading, setLoading] = useState(false);
   const defaultInputs = { name: '', description: '', requiredAmount: 0, organizer: { name: '', location: '', email: '' }, beneficiary: { name: '', location: '', email: '' } };
   const [inputs, setInputs] = useState(defaultInputs);
@@ -43,7 +44,30 @@ const AddProject = ({ modal, toggle }) => {
     }
   };
   useEffect(() => {
-    editingProject ? setInputs(defaultInputs) : setInputs(defaultInputs);
+    if (editingProject && selectedProject) {
+      const getProjectDetails = async () => {
+        const myQuery = `
+        query GetProjectById($projectid: ID!) {
+            getProjectById(projectid: $projectid) {
+              organizer {
+                location
+                email
+                name
+              }
+              beneficiary {
+                name
+                location
+              }
+            }
+          }
+        `;
+        const results = await sendQuery(myQuery, { projectid: selectedProject.id });
+        const organizersAndBeneficiaries = results.data && results.data.getProjectById ? results.data.getProjectById
+          : { ...defaultInputs.organizer, ...defaultInputs.beneficiary };
+        setInputs({ ...selectedProject, ...organizersAndBeneficiaries });
+      };
+      getProjectDetails();
+    } else setInputs(defaultInputs);
     setActiveIndex(0);
   }, [modal]);
   if (loading) {
