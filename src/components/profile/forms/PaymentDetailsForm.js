@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Calendar } from 'primereact/calendar';
-import { InputNumber } from 'primereact/inputnumber';
+import { InputMask } from 'primereact/inputmask';
 import { useAtom } from 'jotai';
 import { sendQuery } from '../../globalFuncs';
 import { queryClient, toastAtom, userAtom } from '../../layout';
@@ -23,22 +23,24 @@ const PaymentDetailsForm = ({ data }) => {
     newObj.payment[key] = key === 'cardNumber' ? value.toString() : value;
     setInputs(newObj);
   };
-  const validate = (callback) => {
-    setLoading(false);
-    callback();
-  };
   const handleSubmit = async (ev) => {
     try {
       ev.preventDefault();
       setLoading(true);
-      const invalid = inputs.payment.cardNumber.toString().length < 8;
-      if (invalid) return validate(() => toast.current.show({ severity: 'error', summary: 'Missing/insufficient required info', detail: 'Please make sure you enter the correct details', sticky: true }));
+      const invalid = inputs.payment.cardNumber.length < 8;
+      console.log(inputs.payment.cardNumber);
+      if (invalid) {
+        setLoading(false);
+        return toast.current.show({ severity: 'error', summary: 'Card number is insufficient', detail: 'The card number has to be atleast 16 digits', sticky: true });
+      }
       const myQuery = `
             query Query($userid: ID!, $updates: UserInput!) {
               updateUserProfile(userid: $userid, updates: $updates)
             }
           `;
-      const results = await sendQuery(myQuery, { userid: user.id, updates: inputs });
+      const updates = inputs;
+      updates.payment.cardNumber = parseInt(inputs.payment.cardNumber.replace(' ', ''));
+      const results = await sendQuery(myQuery, { userid: user.id, updates });
       setLoading(false);
       queryClient.invalidateQueries(['fetchUserProfile']);
       if (results.errors) return toast.current.show({ severity: 'error', summary: 'Error updating your payment details', detail: results.errors[0].message, sticky: true });
@@ -52,7 +54,7 @@ const PaymentDetailsForm = ({ data }) => {
     <form onSubmit={handleSubmit} className="grid formgrid p-fluid">
       <div className="field mb-4 col-12">
         <label htmlFor="card-number" className="font-medium text-900">Card Number</label>
-        <InputNumber id="card-number" useGrouping={false} value={inputs.payment.cardNumber || data?.payment?.cardNumber || ''} onChange={(ev) => updateInput('cardNumber', ev.value)} required />
+        <InputMask mask="9999 9999 9999 9999" id="card-number" value={inputs.payment.cardNumber || data?.payment?.cardNumber || ''} onChange={(ev) => updateInput('cardNumber', ev.value)} />
       </div>
       <div className="field mb-4 col-12">
         <label htmlFor="name-on-card" className="font-medium text-900">Name on Card</label>
