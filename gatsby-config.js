@@ -19,7 +19,7 @@ module.exports = {
         background_color: '#e91e63',
         theme_color: '#e91e63',
         display: 'standalone',
-        icon: 'src/images/favicon.png'
+        icon: 'static/favicon.webp'
       }
     },
     {
