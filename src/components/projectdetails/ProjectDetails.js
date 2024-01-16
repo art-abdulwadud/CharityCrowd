@@ -6,7 +6,6 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 import { Button } from 'primereact/button';
 import { navigate } from 'gatsby';
 import { useAtom } from 'jotai';
-import { FaRegEdit } from 'react-icons/fa';
 import { copyToClipboard, sendQuery } from '../globalFuncs';
 import PublicProjectDetails from './PublicProjectDetails';
 import animateCSS from '../animate';
@@ -102,9 +101,7 @@ const ProjectDetails = ({ projectId, inputs, setInputs, currentProject }) => {
           <BreadCrumb model={items} home={home} className="mb-2" />
           <div className="surface-card p-4 shadow-2 border-round">
             <div className="font-medium text-3xl text-pink-500 mb-3 flex gap-1 align-items-center">
-              <span>Project details</span>
-              {/* Only allow the user who created the project to edit it */}
-              {user?.id === data.userId ? <FaRegEdit /> : null}
+              Project details
             </div>
             <div className="text-500 mb-3">
               Project was posted on {new Date(parseInt(data.createdAt)).toDateString()} {`${data.numberOfDonations > 0 ? `and has ${data.numberOfDonations} donations` : ''}`}

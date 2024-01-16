@@ -3,11 +3,14 @@ import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import { navigate } from 'gatsby';
 import { useAtom } from 'jotai';
-import { numberWithCommas, pageLoadingAtom } from '../layout';
+import { numberWithCommas, pageLoadingAtom, userAtom } from '../layout';
 import DonaterName from '../projectdetails/donations/DonaterName';
+import { showAddProjectModalAtom } from './Projects';
 
 const SingleProject = ({ project }) => {
-  const { id, name, description, requiredAmount, currentAmount, lastDonation } = project;
+  const [, setModal] = useAtom(showAddProjectModalAtom);
+  const [user] = useAtom(userAtom);
+  const { id, name, description, requiredAmount, currentAmount, lastDonation, userId } = project;
   const [, setPageLoading] = useAtom(pageLoadingAtom);
   return (
     <div className="col-12 md:col-6 xl:col-4 p-3 enlarge single-project">
@@ -48,8 +51,9 @@ const SingleProject = ({ project }) => {
             ) : null}
           </div>
         </div>
-        <div className="flex pt-3">
+        <div className="flex pt-3 gap-1">
           <Button
+            type="button"
             label="More info"
             className="p-button-outlined bg-pink-500 border-pink-500 text-white w-100"
             onClick={() => {
@@ -57,6 +61,15 @@ const SingleProject = ({ project }) => {
               navigate(`/project/?projectId=${id}`);
             }}
           />
+          {/* Only allow the user who created the project to edit it */}
+          {user?.id === userId ? (
+            <Button
+              type="button"
+              label="Edit"
+              className="p-button-outlined bg-white border-pink-500 text-pink-500 w-100"
+              onClick={() => setModal(true)}
+            />
+          ) : null}
         </div>
       </div>
     </div>

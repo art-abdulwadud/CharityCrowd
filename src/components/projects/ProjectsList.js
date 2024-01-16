@@ -11,6 +11,7 @@ const ProjectsList = () => {
         getAllProjects {
           name
           _id
+          userId
           requiredAmount
           currentAmount
           lastDonation {
