@@ -22,7 +22,7 @@ const Sidebar = ({ children }) => {
       <div id="app-sidebar" className="surface-section h-full lg:h-auto hidden lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none" style={{ width: '280px' }}>
         <div className="flex flex-column h-full">
           <div className="flex align-items-center px-5 flex-shrink-0" style={{ height: '60px' }}>
-            <img src="/favicon.png" alt="hyper-700" height={50} width={130} />
+            <img src="/logo.webp" alt="hyper-700" height={80} width={110} style={{ marginBottom: '-20px' }} />
           </div>
           <div className="overflow-y-auto">
             <ul className="list-none p-0 m-0 overflow-hidden mt-4">
