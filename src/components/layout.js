@@ -95,7 +95,7 @@ const Layout = ({ children }) => {
           const url = new URL(window.location.href);
           url.searchParams.delete('userid');
         }
-        setTimeout(() => setPageLoading(false), 500);
+        setTimeout(() => setPageLoading(false), 200);
       }
     });
     return () => null;

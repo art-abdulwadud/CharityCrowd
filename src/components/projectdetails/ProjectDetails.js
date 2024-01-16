@@ -53,6 +53,7 @@ const ProjectDetails = ({ projectId, inputs, setInputs, currentProject }) => {
               _id
               requiredAmount
               currentAmount
+              userId
               firstDonation {
                 userId
                 amount
