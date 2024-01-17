@@ -11,16 +11,16 @@ import { sendQuery } from '../../globalFuncs';
 import { editingProjectAtom, selectedProjectAtom } from '../Projects';
 
 const editProjectQuery = `
-  mutation AddAProject($currentUser: String!, $project: ProjectInput!) {
-    addAProject(currentUser: $currentUser, project: $project) {
+  mutation EditProject($currentUser: String!, $project: ProjectInput!) {
+    editProject(currentUser: $currentUser, project: $project) {
       _id
     }
   }
 `;
 
 const addProjectQuery = `
-  mutation EditProject($currentUser: String!, $project: ProjectInput!) {
-    editProject(currentUser: $currentUser, project: $project) {
+  mutation AddAProject($currentUser: String!, $project: ProjectInput!) {
+    addAProject(currentUser: $currentUser, project: $project) {
       _id
     }
   }

@@ -33,7 +33,7 @@ const StageTwoPayment = ({ inputs, setInputs }) => {
         </div>
         <div className="field mb-4 col-12 md:col-6">
           <label htmlFor="pin-number" className="font-medium text-900">CVV</label>
-          <InputText id="pin-number" type="password" minLength={3} defaultValue={inputs.payment?.cvv || ''} onChange={(ev) => updateInput('cvv', ev.target.value)} maxLength={4} required />
+          <InputText id="pin-number" type="password" minLength={3} onChange={(ev) => updateInput('cvv', ev.target.value)} maxLength={4} required />
         </div>
       </div>
     </div>

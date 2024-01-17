@@ -32,7 +32,7 @@ const ProjectsList = () => {
     return (<ReactQueryPreloader isError={isError} isLoading={isLoading} error={error} />);
   }
   return (
-    <div className="grid grid-nogutter">
+    <div className="grid p-2">
       {data && data.getAllProjects ? data.getAllProjects.map((key) => (
         <SingleProject key={key._id} project={{ ...key, id: key._id }} />
       )) : null}

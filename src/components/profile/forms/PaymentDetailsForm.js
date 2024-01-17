@@ -66,7 +66,7 @@ const PaymentDetailsForm = ({ data }) => {
       </div>
       <div className="field mb-4 col-12 md:col-6">
         <label htmlFor="pin-number" className="font-medium text-900">CVV</label>
-        <InputText id="pin-number" type="password" minLength={3} defaultValue={inputs.payment.cvv || data.payment.cvv || ''} onChange={(ev) => updateInput('cvv', ev.target.value)} maxLength={4} required />
+        <InputText id="pin-number" type="password" minLength={3} onChange={(ev) => updateInput('cvv', ev.target.value)} maxLength={4} required />
       </div>
       <div className="col-12">
         <Button label="Save Changes" className="w-auto mt-3 bg-pink-500 border-pink-500" type="submit" loading={loading} />

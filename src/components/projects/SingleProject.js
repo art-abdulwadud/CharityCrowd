@@ -15,7 +15,7 @@ const SingleProject = ({ project }) => {
   const { id, name, description, requiredAmount, currentAmount, lastDonation, userId } = project;
   const [, setPageLoading] = useAtom(pageLoadingAtom);
   return (
-    <div className="col-12 md:col-6 xl:col-4 p-3 enlarge single-project">
+    <div className="enlarge single-project position-relative col-12 md:col-6 c-col-4">
       <div className="surface-card shadow-2 border-rounded p-3" style={{ minWidth: '360px' }}>
         <div className="flex border-bottom-1 surface-border pb-3">
           <div className="flex flex-column justify-content-between" style={{ minHeight: '150px' }}>
