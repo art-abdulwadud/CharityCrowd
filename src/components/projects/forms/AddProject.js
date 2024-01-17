@@ -10,6 +10,22 @@ import { queryClient, userAtom } from '../../layout';
 import { sendQuery } from '../../globalFuncs';
 import { editingProjectAtom, selectedProjectAtom } from '../Projects';
 
+const editProjectQuery = `
+query EditProject($currentUser: String!, $project: ProjectInput!) {
+  editProject(currentUser: $currentUser, project: $project) {
+    _id
+  }
+}
+`;
+
+const addProjectQuery = `
+query AddAProject($currentUser: String!, $project: ProjectInput!) {
+  addAProject(currentUser: $currentUser, project: $project) {
+    _id
+  }
+}
+`;
+
 const AddProject = ({ modal, toggle }) => {
   const [user] = useAtom(userAtom);
   const [editingProject] = useAtom(editingProjectAtom);
@@ -19,24 +35,17 @@ const AddProject = ({ modal, toggle }) => {
   const [inputs, setInputs] = useState(defaultInputs);
   const [activeIndex, setActiveIndex] = useState(0);
   const items = [{ label: 'Step 1', command: () => setActiveIndex(0) }, { label: 'Step 2', command: () => setActiveIndex(1) }, { label: 'Step 3', command: () => setActiveIndex(2) }, { label: 'Step 4', command: () => setActiveIndex(3) }];
-  const handleSubmit = async (ev) => {
+  const handleSubmit = async (ev, saveChanges = false) => {
     try {
-      ev.preventDefault();
+      ev?.preventDefault();
       setLoading(true);
-      if (activeIndex === 3) {
-        const myQuery = `
-          query AddAProject($currentUser: String!, $project: ProjectInput!) {
-            addAProject(currentUser: $currentUser, project: $project) {
-              _id
-            }
-          }
-          `;
-        const results = await sendQuery(myQuery, { currentUser: user.email, project: { ...inputs, userId: user.id } });
+      if (activeIndex === 3 || saveChanges) {
+        const results = await sendQuery(editingProject ? editProjectQuery : addProjectQuery,
+          { currentUser: user.id, project: { ...inputs, userId: user.id } });
         results.errors ? null : queryClient.invalidateQueries(['fetchProjects']);
       }
       activeIndex === 3 ? setActiveIndex(0) : setActiveIndex(activeIndex + 1);
-      activeIndex === 3 ? setInputs(defaultInputs) : null;
-      activeIndex === 3 ? toggle() : null;
+      activeIndex === 3 || saveChanges ? toggle() : null;
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -45,7 +54,8 @@ const AddProject = ({ modal, toggle }) => {
   };
   useEffect(() => {
     if (editingProject && selectedProject) {
-      setInputs({ ...selectedProject, ...defaultInputs.organizer, ...defaultInputs.beneficiary });
+      const { id, name, description, requiredAmount } = selectedProject;
+      setInputs({ name, description, requiredAmount, ...defaultInputs.organizer, ...defaultInputs.beneficiary });
       const getProjectDetails = async () => {
         const myQuery = `
         query GetProjectById($projectid: ID!) {
@@ -65,7 +75,7 @@ const AddProject = ({ modal, toggle }) => {
         const results = await sendQuery(myQuery, { projectid: selectedProject.id });
         const organizersAndBeneficiaries = results.data && results.data.getProjectById ? results.data.getProjectById
           : { ...defaultInputs.organizer, ...defaultInputs.beneficiary };
-        setInputs({ ...selectedProject, ...organizersAndBeneficiaries });
+        setInputs({ id, name, description, requiredAmount, ...organizersAndBeneficiaries });
       };
       getProjectDetails();
     } else setInputs(defaultInputs);
@@ -95,7 +105,7 @@ const AddProject = ({ modal, toggle }) => {
               <Button
                 label="Back"
                 icon="pi pi-angle-left"
-                className="text-sm  bg-white border-pink-500 mt-3 text-700 mr-2"
+                className="text-sm bg-white border-pink-500 mt-3 text-700 mr-2"
                 type="button"
                 onClick={() => setActiveIndex(activeIndex - 1)}
               />
@@ -106,6 +116,15 @@ const AddProject = ({ modal, toggle }) => {
               className="text-sm bg-pink-500 border-pink-500 mt-3"
               type="submit"
             />
+            {editingProject && activeIndex < 3 ? (
+              <Button
+                loading={loading}
+                label="Save Changes"
+                className="text-sm bg-white border-pink-500 mt-3 text-700 ml-1"
+                type="button"
+                onClick={() => handleSubmit(null, true)}
+              />
+            ) : null}
           </div>
         </form>
       </ModalBody>
