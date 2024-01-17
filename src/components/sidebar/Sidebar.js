@@ -30,7 +30,8 @@ const Sidebar = ({ children }) => {
               {user.id && user.admin ? <SideNav label="Administration" link="/administration" icon="users" /> : null}
               <SideNav label="Projects" link="/projects" icon="folder" />
               <SideNav label="My Donations" link="/mydonations" icon="money-bill" />
-              <SideNav label="Notifications" link="/" icon="bell" />
+              { /* TODO: Add notifications page */ }
+              {/* <SideNav label="Notifications" link="/" icon="bell" /> */}
             </ul>
           </div>
         </div>
