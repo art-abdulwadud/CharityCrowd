@@ -12,7 +12,7 @@ const RoleModalBtns = ({ data, refetch, name, id }) => {
     ev.preventDefault();
     setLoading(true);
     const myQuery = `
-      query Query($currentUser: String!, $userid: ID!, $claim: Obj!) {
+      mutation UpdateUserProfile($currentUser: String!, $userid: ID!, $claim: Obj!) {
         addCustomClaim(currentUser: $currentUser, userid: $userid, claim: $claim)
       }
     `;
