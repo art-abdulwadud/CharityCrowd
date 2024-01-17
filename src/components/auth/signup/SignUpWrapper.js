@@ -13,7 +13,7 @@ const SignUpWrapper = () => {
   const [loading, setLoading] = useState(false);
   const [toast] = useAtom(toastAtom);
   const myQuery = `
-    query SignUpUser($email: String!, $password: String!) {
+    mutation SignUpUser($email: String!, $password: String!) {
       signUpUser(email: $email, password: $password) {
         _id
       }

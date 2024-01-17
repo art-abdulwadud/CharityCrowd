@@ -24,10 +24,10 @@ const UserInfoForm = ({ data, setEditing, editing }) => {
       setLoading(true);
       if (inputs.name && inputs.name.length < 1) return toast.current.show({ severity: 'error', summary: 'Error updating your profile', detail: 'Your username cannot be empty', sticky: true });
       const myQuery = `
-            query Query($userid: ID!, $updates: UserInput!) {
-              updateUserProfile(userid: $userid, updates: $updates)
-            }
-          `;
+        mutation UpdateUserProfile($userid: ID!, $updates: UserInput!) {
+          updateUserProfile(userid: $userid, updates: $updates)
+        }
+      `;
       const results = await sendQuery(myQuery, { userid: user.id, updates: inputs });
       setLoading(false);
       setInputs({});

@@ -34,10 +34,10 @@ const PaymentDetailsForm = ({ data }) => {
         return toast.current.show({ severity: 'error', summary: 'Card number is insufficient', detail: 'The card number has to be atleast 16 digits', sticky: true });
       }
       const myQuery = `
-            query Query($userid: ID!, $updates: UserInput!) {
-              updateUserProfile(userid: $userid, updates: $updates)
-            }
-          `;
+        mutation UpdateUserProfile($userid: ID!, $updates: UserInput!) {
+          updateUserProfile(userid: $userid, updates: $updates)
+        }
+      `;
       const updates = inputs;
       updates.payment.cardNumber = parseInt(inputs.payment.cardNumber.replace(' ', ''));
       const results = await sendQuery(myQuery, { userid: user.id, updates });
