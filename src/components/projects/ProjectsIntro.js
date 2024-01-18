@@ -3,10 +3,12 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { useAtom } from 'jotai';
 import { editingProjectAtom, showAddProjectModalAtom } from './Projects';
+import { searchProjectAtom } from '../projectdetails/Project';
 
 const ProjectsIntro = () => {
   const [, setModal] = useAtom(showAddProjectModalAtom);
   const [, setEditingProject] = useAtom(editingProjectAtom);
+  const [, setSearchProject] = useAtom(searchProjectAtom);
   return (
     <>
       <div className="surface-section px-4 py-5 md:px-6 lg:px-8">
@@ -26,7 +28,11 @@ const ProjectsIntro = () => {
           </div>
           <span className="p-input-icon-left w-full md:w-auto">
             <i className="pi pi-search" />
-            <InputText placeholder="Search" className="w-full md:w-auto bx-none outline-none" />
+            <InputText
+              placeholder="Search"
+              className="w-full md:w-auto bx-none outline-none"
+              onChange={(e) => setSearchProject(e.target.value)}
+            />
           </span>
         </div>
       </div>
