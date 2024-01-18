@@ -208,7 +208,7 @@ button.btn-close {
 }
 
 .enlarge:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 /* Dismiss last pass extension */
@@ -255,5 +255,13 @@ div[data-lastpass-root] {
 
     .single-project {
         max-width: 300px;
+    }
+}
+
+@media screen and (min-width: 1300px){
+    .c-col-4 {
+        flex: 0 0 auto;
+        padding: 0.5rem;
+        width: 33.3333% !important;
     }
 }

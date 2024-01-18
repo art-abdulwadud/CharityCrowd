@@ -8,7 +8,7 @@ import SectionHeading from '../reusable/SectionHeading';
 const DashboardHeading = () => {
   const [user] = useAtom(userAtom);
   return (
-    <SectionHeading title={user.name} des="vivamus id nisl interdum, blandit augue sit amet, eleifend mi">
+    <SectionHeading title={user.name} des={user.bio || ''}>
       <Button
         label="Edit Profile"
         className="bg-pink-500 border-none"

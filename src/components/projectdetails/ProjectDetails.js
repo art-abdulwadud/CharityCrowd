@@ -12,10 +12,11 @@ import animateCSS from '../animate';
 import ReactQueryPreloader from '../ReactQueryPreloader';
 import StageOne from './forms/StageOne';
 import StageTwo from './forms/StageTwo';
-import { isBrowser, toastAtom } from '../layout';
+import { isBrowser, toastAtom, userAtom } from '../layout';
 
 const ProjectDetails = ({ projectId, inputs, setInputs, currentProject }) => {
   const [toast] = useAtom(toastAtom);
+  const [user] = useAtom(userAtom);
   const projectListRef = useRef();
   const donateAndShareButtons = useRef();
   const backAndProceedButtons = useRef();
@@ -39,6 +40,7 @@ const ProjectDetails = ({ projectId, inputs, setInputs, currentProject }) => {
     ev.preventDefault();
     copyToClipboard(`${isBrowser ? `${window.location.href}` : ''}`, toast);
   };
+  const requestLogin = () => navigate('/login');
   useEffect(() => {
     return () => switchSlide(false, 1);
   }, []);
@@ -50,6 +52,7 @@ const ProjectDetails = ({ projectId, inputs, setInputs, currentProject }) => {
               _id
               requiredAmount
               currentAmount
+              userId
               firstDonation {
                 userId
                 amount
@@ -97,13 +100,15 @@ const ProjectDetails = ({ projectId, inputs, setInputs, currentProject }) => {
         <>
           <BreadCrumb model={items} home={home} className="mb-2" />
           <div className="surface-card p-4 shadow-2 border-round">
-            <div className="font-medium text-3xl text-pink-500 mb-3">Project details</div>
+            <div className="font-medium text-3xl text-pink-500 mb-3 flex gap-1 align-items-center">
+              Project details
+            </div>
             <div className="text-500 mb-3">
               Project was posted on {new Date(parseInt(data.createdAt)).toDateString()} {`${data.numberOfDonations > 0 ? `and has ${data.numberOfDonations} donations` : ''}`}
             </div>
             <div className={`flex justify-content-between pb-3 ${activeSlide > 1 ? 'hide-section' : 'animate__animated animate__fadeInDown'}`} ref={donateAndShareButtons}>
-              <Button label="Donate" icon="pi pi-shopping-cart" className="p-button-outlined bg-pink-500 border-pink-500 text-white w-6 mr-2" onClick={switchSlide} />
-              <Button label="Share" icon="pi pi-share-alt" className="p-button-outlined p-button-secondary border-pink-500 w-6 ml-2" onClick={handleShare} />
+              <Button label="Donate" icon="pi pi-shopping-cart" className="p-button-outlined bg-pink-500 border-pink-500 text-white w-6 mr-2" onClick={user.id ? switchSlide : requestLogin} type="button" />
+              <Button label="Share" icon="pi pi-share-alt" className="p-button-outlined p-button-secondary border-pink-500 w-6 ml-2" onClick={handleShare} type="button" />
             </div>
             <div className={`flex justify-content-between pb-3 ${activeSlide < 2 ? 'hide-section' : 'animate__animated animate__fadeInUp'}`} ref={backAndProceedButtons}>
               <Button label="Back" icon="pi pi-angle-left" className="p-button-outlined bg-pink-500 border-pink-500 text-white mr-2" onClick={() => switchSlide(true)} />

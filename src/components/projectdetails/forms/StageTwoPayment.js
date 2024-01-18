@@ -1,7 +1,7 @@
 import React from 'react';
-import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
+import { InputMask } from 'primereact/inputmask';
 
 const StageTwoPayment = ({ inputs, setInputs }) => {
   const updateInput = (key, value) => {
@@ -16,12 +16,12 @@ const StageTwoPayment = ({ inputs, setInputs }) => {
       </div>
       <div className="alert alert-warning text-xs" role="alert">
         <i className="pi pi-exclamation-triangle mr-2" />
-        Note that no deductions will be made to your credit/debit card until the app goes LIVE!
+        Note: This App is only a Demo! Please do not use your real payment details! Just use fake details!
       </div>
       <div className="grid formgrid p-fluid">
         <div className="field mb-4 col-12">
           <label htmlFor="card-number" className="font-medium text-900">Card Number</label>
-          <InputNumber id="card-number" useGrouping={false} value={inputs.payment?.cardNumber || ''} onChange={(ev) => updateInput('cardNumber', ev.value)} required />
+          <InputMask id="card-number" mask="9999 9999 9999 9999" value={inputs.payment?.cardNumber || ''} onChange={(ev) => updateInput('cardNumber', ev.value)} required />
         </div>
         <div className="field mb-4 col-12">
           <label htmlFor="name-on-card" className="font-medium text-900">Name on Card</label>
@@ -29,11 +29,11 @@ const StageTwoPayment = ({ inputs, setInputs }) => {
         </div>
         <div className="field mb-4 col-12 md:col-6">
           <label htmlFor="expiry-date" className="font-medium text-900">Expiry date</label>
-          <Calendar id="expiry-date" value={inputs.payment?.expiryDate ? new Date(parseInt(inputs.payment?.expiryDate)) : ''} onChange={(ev) => updateInput('expiryDate', ev.target.value)} required />
+          <Calendar id="expiry-date" view="month" dateFormat="mm/yy" value={inputs.payment?.expiryDate ? new Date(parseInt(inputs.payment?.expiryDate)) : new Date()} onChange={(ev) => updateInput('expiryDate', ev.target.value)} required />
         </div>
         <div className="field mb-4 col-12 md:col-6">
           <label htmlFor="pin-number" className="font-medium text-900">CVV</label>
-          <InputText id="pin-number" type="password" minLength={3} defaultValue={inputs.payment?.cvv || ''} onChange={(ev) => updateInput('cvv', ev.target.value)} maxLength={4} required />
+          <InputText id="pin-number" type="password" minLength={3} onChange={(ev) => updateInput('cvv', ev.target.value)} maxLength={4} required />
         </div>
       </div>
     </div>

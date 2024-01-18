@@ -7,7 +7,7 @@ module.exports = {
     title: 'CharityCrowd',
     description: 'A simple app for funding crucial projects',
     author: '@art-abdulwadud',
-    siteUrl: 'https://charitycrowd-ke.web.app'
+    siteUrl: 'https://gatsbystarterdefaultsource.gatsbyjs.io/'
   },
   plugins: [
     {
@@ -19,7 +19,7 @@ module.exports = {
         background_color: '#e91e63',
         theme_color: '#e91e63',
         display: 'standalone',
-        icon: 'src/images/favicon.png'
+        icon: 'static/favicon.webp'
       }
     },
     {

@@ -14,7 +14,7 @@ const NavBar = () => {
   const btnRef1 = useRef();
   return (
     <div className="c-navbar pe-2 shadow-2 flex align-items-center justify-content-between relative lg:static" style={{ minHeight: '80px', maxHeight: '80px' }}>
-      <img src="/favicon.png" alt="bastion-700" height={35} width={85} className="mr-0 ml-2" />
+      <img src="/favicon.webp" alt="bastion-700" height={60} width={100} className="mr-0 ml-2" />
       <StyleClass nodeRef={btnRef1} selector="@next" enterClassName="hidden" leaveToClassName="hidden" hideOnOutsideClick>
         <a ref={btnRef1} className="cursor-pointer block lg:hidden text-0 text-pink-500">
           <i className="pi pi-bars text-4xl" />

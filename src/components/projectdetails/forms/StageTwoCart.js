@@ -13,7 +13,7 @@ const StageTwoCart = ({ inputs, projectId, switchSlide, setInputs }) => {
       ev.preventDefault();
       setLoading(true);
       const myQuery = `
-        query AddDonation($donation: DonationInput!) {
+        mutation AddDonation($donation: DonationInput!) {
           addDonation(donation: $donation) {
             _id
             userId

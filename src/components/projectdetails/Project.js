@@ -6,6 +6,7 @@ import Sidebar from '../sidebar/Sidebar';
 import ProjectDetails from './ProjectDetails';
 
 export const donationInputsAtom = atom({});
+export const searchProjectAtom = atom('');
 
 const Project = ({ currentProject }) => {
   const [user] = useAtom(userAtom);
