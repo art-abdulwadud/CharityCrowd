@@ -7,7 +7,6 @@ import ProjectDetails from './ProjectDetails';
 
 export const donationInputsAtom = atom({});
 export const searchProjectAtom = atom('');
-export const projectsFilteredAtom = atom([]);
 
 const Project = ({ currentProject }) => {
   const [user] = useAtom(userAtom);

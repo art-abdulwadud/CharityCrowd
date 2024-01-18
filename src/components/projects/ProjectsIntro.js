@@ -29,7 +29,7 @@ const ProjectsIntro = () => {
           <span className="p-input-icon-left w-full md:w-auto">
             <i className="pi pi-search" />
             <InputText
-              placeholder="Search"
+              placeholder="Search project name"
               className="w-full md:w-auto bx-none outline-none"
               onChange={(e) => setSearchProject(e.target.value)}
             />
