@@ -1,11 +1,9 @@
 /* eslint-disable max-statements */
 /* eslint-disable multiline-comment-style */
 export const sendQuery = async (query, variables = null) => {
-  // https://still-meadow-92990.herokuapp.com/graphql
+  // https://charitycrowd.onrender.com/graphql
   // http://localhost:7000/graphql
-  // https://desolate-dawn-93717.herokuapp.com/graphql
-  // https://my-fundraiser.herokuapp.com/graphql
-  const request = await fetch('http://localhost:7000/graphql', {
+  const request = await fetch('https://charitycrowd.onrender.com/graphql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
