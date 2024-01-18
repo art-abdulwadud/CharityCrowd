@@ -2,10 +2,13 @@ import React from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { useAtom } from 'jotai';
+import { navigate } from 'gatsby';
 import { editingProjectAtom, showAddProjectModalAtom } from './Projects';
 import { searchProjectAtom } from '../projectdetails/Project';
+import { userAtom } from '../layout';
 
 const ProjectsIntro = () => {
+  const [user] = useAtom(userAtom);
   const [, setModal] = useAtom(showAddProjectModalAtom);
   const [, setEditingProject] = useAtom(editingProjectAtom);
   const [, setSearchProject] = useAtom(searchProjectAtom);
@@ -21,8 +24,12 @@ const ProjectsIntro = () => {
               icon="pi pi-plus"
               className="text-sm bg-pink-500 border-pink-500 mt-3"
               onClick={() => {
-                setEditingProject(false);
-                setModal(true);
+                if (user?.id) {
+                  navigate('/login');
+                } else {
+                  setEditingProject(false);
+                  setModal(true);
+                }
               }}
             />
           </div>
