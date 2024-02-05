@@ -25,10 +25,10 @@ const ProjectsIntro = () => {
               className="text-sm bg-pink-500 border-pink-500 mt-3"
               onClick={() => {
                 if (user?.id) {
-                  navigate('/login');
-                } else {
                   setEditingProject(false);
                   setModal(true);
+                } else {
+                  navigate('/login');
                 }
               }}
             />

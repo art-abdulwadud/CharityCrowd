@@ -18,7 +18,7 @@ const Projects = () => {
     <>
       {user.id ? (
         <Sidebar>
-          {user.admin ? <AddProject modal={modal} toggle={() => setModal(!modal)} /> : null}
+          {user.id ? <AddProject modal={modal} toggle={() => setModal(!modal)} /> : null}
           <ProjectsIntro />
           <ProjectsList />
         </Sidebar>

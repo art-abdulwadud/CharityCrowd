@@ -3,18 +3,22 @@
 export const sendQuery = async (query, variables = null) => {
   // https://charitycrowd.onrender.com/graphql
   // http://localhost:7000/graphql
-  const request = await fetch('https://charitycrowd.onrender.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    },
-    body: JSON.stringify({ query, variables: { ...variables } })
-  });
-  const response = await request.json();
-  console.log(response.errors);
-  if (response.errors) throw response.errors;
-  return response;
+  try {
+    const request = await fetch('https://foam-shocking-ornament.glitch.me/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({ query, variables: { ...variables } })
+    });
+    const response = await request.json();
+    if (response.errors) throw response.errors;
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
 export const copyToClipboard = (textToCopy, toast) => {
