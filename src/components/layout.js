@@ -106,6 +106,7 @@ const Layout = ({ children }) => {
       {pageLoading ? (
         <div className="w-100 h-100vh d-flex center column m-0">
           <HashLoader color="#ea2c58" background="white" size={90} />
+          <p className="text-pink-500 text-xs">Server is paused after long period of inactivity. It could take upto 60 seconds to restart the server</p>
         </div>
       ) : (
         <>
