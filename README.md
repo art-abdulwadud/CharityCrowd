@@ -50,7 +50,7 @@ Welcome to the frontend repository of CharityCrowd, a platform that empowers use
 2. Set up environment variables
 3. Run the server:
   ```bash
-  yarn start or yarn dev
+  yarn start
   ```
 
 ### Configuration
